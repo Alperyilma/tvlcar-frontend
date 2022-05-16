@@ -1,6 +1,8 @@
+import CustomRoutes from "./router/custom-routes";
+
 const App = () => {
   return (
-    <h1>RENTAL CAR</h1>
+    <CustomRoutes/>
   );
 }
 
