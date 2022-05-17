@@ -3,7 +3,7 @@ import { RiHeadphoneLine, RiMailOpenLine, RiMapPinLine } from "react-icons/ri";
 
 const ContactBar = () => {
   return (
-    <ul className="contact-bar">
+    <ul className="contact-bar" >
       <li>
         <RiHeadphoneLine />
         <div>
@@ -12,7 +12,7 @@ const ContactBar = () => {
           <a href="tel:905555555555">(555)-555-5555</a>
         </div>
       </li>
-      <li>
+      <li className="d-none d-lg-flex">
         <RiMailOpenLine />
         <div>
           <a href="mailto:info@trvlcar.com">info@trvlcar.com</a>

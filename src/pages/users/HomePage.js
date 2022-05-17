@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import Bookbar from "../../components/users/home/bookbar/bookbar";
+import Slider from "../../components/users/home/slider/slider";
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
-  )
-}
+    <>
+      <Slider />
+      <Bookbar />
+    </>
+  );
+};
 
-export default HomePage
+export default HomePage;

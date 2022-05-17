@@ -1,8 +1,10 @@
 .topbar{
     position: absolute;
     top: 0;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid rgb(60, 74, 84);
     z-index: 10;
+    width: 100%;
+    padding: 1rem;
 }
 
 .topbar .social-bar{
@@ -21,19 +23,29 @@
 .topbar .contact-bar{
     list-style: none;
     display: flex;
-    font-size: 1rem;
     gap: 1rem;  
     padding: 0;
     margin: 0;
+    justify-content: flex-end;
 }
 
 .topbar .contact-bar li{
     display: flex;
     align-items: center;
+    /* iconlarin arasini acar */
     gap: 1rem;
+    font-size: 0.9rem;
 }
 
 .topbar .contact-bar li svg{
     color: var(--color1);
     font-size: 2rem;
+}
+
+.topbar .contact-bar a{
+    color: white;
+}
+
+.topbar .contact-bar div{
+    color: white;
 }
