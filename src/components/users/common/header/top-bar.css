@@ -7,7 +7,7 @@
     padding: 1rem;
 }
 
-.topbar .social-bar{
+.social-bar{
     list-style: none;
     display: flex;
     font-size: 1.3rem;
@@ -16,11 +16,11 @@
     margin: 0;
 }
 
-.topbar .social-bar a{
+.social-bar a{
     color: white;
 }
 
-.topbar .contact-bar{
+.contact-bar{
     list-style: none;
     display: flex;
     gap: 1rem;  
@@ -29,7 +29,7 @@
     justify-content: flex-end;
 }
 
-.topbar .contact-bar li{
+.contact-bar li{
     display: flex;
     align-items: center;
     /* iconlarin arasini acar */
@@ -37,15 +37,15 @@
     font-size: 0.9rem;
 }
 
-.topbar .contact-bar li svg{
+.contact-bar li svg{
     color: var(--color1);
     font-size: 2rem;
 }
 
-.topbar .contact-bar a{
+.contact-bar a{
     color: white;
 }
 
-.topbar .contact-bar div{
+.contact-bar div{
     color: white;
 }

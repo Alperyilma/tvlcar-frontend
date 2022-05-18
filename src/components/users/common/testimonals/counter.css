@@ -1,0 +1,9 @@
+.counters{
+    position: relative;
+    z-index: 5;
+}
+
+.counters .card{
+    background-color: var(--color2);
+    text-align: center;
+}

@@ -13,6 +13,7 @@
     padding: 0.5rem 1rem !important;
 }
 
+/* Active olan buton'un rengini degistiriyor */
 .navbar-dark .navbar-nav .nav-link.active, 
 .navbar-dark .navbar-nav .show>.nav-link {
     background-color: var(--color1);

@@ -12,14 +12,6 @@ const Slider = () => {
       
         let image = require(`../../../../assets/img/slider/${slide.image}`);
 
-      
-      
-      
-      
-      
-      
-      
-      
       return(
         <Carousel.Item key={index} style={{backgroundImage: `url(${image})`}}>
           
