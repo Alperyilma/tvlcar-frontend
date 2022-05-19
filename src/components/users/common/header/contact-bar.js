@@ -7,9 +7,9 @@ const ContactBar = () => {
       <li>
         <RiHeadphoneLine />
         <div>
-          <a href="tel:905555555555">(555)-555-5555</a>
+          <a href="tel:0467878879">(467)-8788-79</a>
           <br />
-          <a href="tel:905555555555">(555)-555-5555</a>
+          <a href="tel:0467878879">(555)-8788-79</a>
         </div>
       </li>
       <li className="d-none d-lg-flex">
@@ -17,7 +17,7 @@ const ContactBar = () => {
         <div>
           <a href="mailto:info@trvlcar.com">info@trvlcar.com</a>
           <br />
-          <a href="mailto:support@trvlcar.com">support@trvlcar.com</a>
+          <a href="mailto:support@trvlcar.com">alperyilmaz.be@gmail.com</a>
         </div>
       </li>
       <li>
