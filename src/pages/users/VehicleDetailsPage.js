@@ -1,12 +1,12 @@
 import React from 'react'
 import PageHeader from '../../components/users/common/page-header/page-header'
 
-const VehiclesPage = () => {
+const VehicleDetailsPage = () => {
   return (
     <>
-    <PageHeader title="Vehicles"/>
+    <PageHeader title="Vehicle Details"/>
     </>
   )
 }
 
-export default VehiclesPage
+export default VehicleDetailsPage

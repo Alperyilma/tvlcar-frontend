@@ -1,6 +1,6 @@
 import React from "react";
 import ContactBar from "../common/header/contact-bar";
-import "./contact.css"
+import "./contact.css";
 
 const Contact = () => {
   return (

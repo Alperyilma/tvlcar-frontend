@@ -1,16 +1,14 @@
-import { Button } from "react-bootstrap";
 import React from "react";
-import "./bookbar.css";
+import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "./bookbar.css";
 
 const Bookbar = () => {
   return (
     <div className="bookbar">
-      <h3>Explorer our cars and book now</h3>
+      <h3>Explore our cars and book now</h3>
       <div>
-        <Button variant="secondary" as={Link} to="/vehicles">
-          BOOK NOW
-        </Button>
+        <Button variant="secondary" as={Link} to="/vehicles">BOOK NOW</Button>
       </div>
     </div>
   );

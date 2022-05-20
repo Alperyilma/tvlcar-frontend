@@ -1,17 +1,17 @@
 .whyus ul{
     list-style: none;
-    margin: 0;
+    margin:0;
     padding: 0;
 }
 
 .whyus li::before{
-    content: "\2022";
+    content:"\2665";
     color: var(--color1);
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    position: absolute;
-    left: 0;
-    top: -8px;
+    position:absolute;
+    left:0;
+    top:-8px;
 }
 
 .whyus li{

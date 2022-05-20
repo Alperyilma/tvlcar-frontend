@@ -1,5 +1,5 @@
 .page-header{
-    background-image: url("../../../../assets/img/bg/page-header.jpg");
+    background-image: url("../../../../assets/img/bg/page-header-bg.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -14,9 +14,9 @@
 .page-header::after{
     content: "";
     position: absolute;
-    left: 0; right: 0; bottom: 0; top: 0;
+    left:0; right: 0; bottom: 0; top:0;
     background-color: var(--color2);
-    opacity: 0.8;
+    opacity:0.8;
 }
 
 .page-header h1{

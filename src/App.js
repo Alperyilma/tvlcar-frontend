@@ -1,8 +1,13 @@
+import { ToastContainer } from "react-toastify";
 import CustomRoutes from "./router/custom-routes";
+import { StoreProvider } from "./store";
 
 const App = () => {
   return (
-    <CustomRoutes/>
+    <StoreProvider>
+      <CustomRoutes/>
+      <ToastContainer />
+    </StoreProvider>
   );
 }
 

@@ -1,19 +1,19 @@
 .main-navbar{
     position: absolute !important;
     top: 70px;
-    z-index: 11;
-    width: 100%;
+    z-index: 10;
+    width:100%;
 }
+
 .main-navbar .navbar-nav{
-    gap: 1rem;
+    gap:1rem;
     font-size: 1.1rem;
 }
 
 .main-navbar .nav-link{
-    padding: 0.5rem 1rem !important;
+    padding:0.5rem 1rem !important;
 }
 
-/* Active olan buton'un rengini degistiriyor */
 .navbar-dark .navbar-nav .nav-link.active, 
 .navbar-dark .navbar-nav .show>.nav-link {
     background-color: var(--color1);

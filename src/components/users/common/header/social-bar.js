@@ -1,34 +1,39 @@
 import React from "react";
-import { Form } from "react-bootstrap";
-import {RiFacebookFill, RiTwitterFill, RiInstagramFill,RiWhatsappFill ,RiLinkedinFill
-} from "react-icons/ri"
+import {
+  RiFacebookFill,
+  RiTwitterFill,
+  RiInstagramFill,
+  RiWhatsappFill,
+  RiLinkedinFill,
+} from "react-icons/ri";
+
 
 const SocialBar = () => {
   return (
     <ul className="social-bar">
       <li>
         <a href="#" target="_blank">
-          <RiFacebookFill/>
+          <RiFacebookFill />
         </a>
       </li>
       <li>
         <a href="#" target="_blank">
-          <RiTwitterFill/>
+          <RiTwitterFill />
         </a>
       </li>
       <li>
         <a href="#" target="_blank">
-          <RiInstagramFill/>
+          <RiInstagramFill />
         </a>
       </li>
       <li>
         <a href="#" target="_blank">
-          <RiWhatsappFill/>
+          <RiWhatsappFill />
         </a>
       </li>
       <li>
         <a href="#" target="_blank">
-          <RiLinkedinFill/>
+          <RiLinkedinFill />
         </a>
       </li>
     </ul>

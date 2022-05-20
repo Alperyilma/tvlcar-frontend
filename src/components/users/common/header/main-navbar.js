@@ -1,14 +1,8 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import logo from "../../../../assets/img/logo/logo.png";
-import {
-  RiHome3Line,
-  RiCarLine,
-  RiInformationLine,
-  RiMapPinLine,
-  RiUserLine,
-} from "react-icons/ri";
+import {RiHome3Line, RiCarLine, RiInformationLine, RiMapPinLine, RiUserLine} from "react-icons/ri";
+import { Link, useLocation } from "react-router-dom";
 import "./main-navbar.css";
 
 const MainNavbar = () => {
@@ -27,19 +21,19 @@ const MainNavbar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/" className={currentPath === "/" ? "active" : ""}>
-              <RiHome3Line /> Home
+              <RiHome3Line/> Home
             </Nav.Link>
             <Nav.Link as={Link} to="/vehicles" className={currentPath === "/vehicles" ? "active" : ""}>
-              <RiCarLine /> Cars
+             <RiCarLine/> Cars
             </Nav.Link>
             <Nav.Link as={Link} to="/about" className={currentPath === "/about" ? "active" : ""}>
-              <RiInformationLine /> About
+              <RiInformationLine/> About
             </Nav.Link>
             <Nav.Link as={Link} to="/contact" className={currentPath === "/contact" ? "active" : ""}>
-              <RiMapPinLine /> Contact
+              <RiMapPinLine/> Contact
             </Nav.Link>
-            <Nav.Link as={Link} to="/auth" className={currentPath === "/auth" ? "active" : ""}>
-              <RiUserLine /> Login/Register
+            <Nav.Link as={Link} to="/auth">
+              <RiUserLine/> Login/Register
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

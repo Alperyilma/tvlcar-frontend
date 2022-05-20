@@ -1,10 +1,10 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import logo from "../../../../assets/img/logo/logo.png";
 import ContactBar from "../header/contact-bar";
 import SocialBar from "../header/social-bar";
-import { Link } from "react-router-dom";
-import "./footer.css"
+import "./footer.css";
 
 const Footer = () => {
   return (
@@ -20,6 +20,7 @@ const Footer = () => {
             </p>
             <SocialBar/>
           </Col>
+          
           <Col md={3}>
             <h4>Quick Links</h4>
             <ul>

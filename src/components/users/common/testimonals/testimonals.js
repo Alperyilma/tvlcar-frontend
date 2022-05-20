@@ -1,11 +1,11 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import "./testimonals.css";
+import { Col, Container, Row } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
+import testimonals from "./testimonals.json";
+import "./testimonals.css";
 import "swiper/css";
 import "swiper/css/pagination";
-import testimonals from "./testimonals.json";
 import Testimonal from "./testimonal";
 import Counters from "./counters";
 
@@ -15,7 +15,7 @@ const Testimonals = () => {
       <Container>
         <Row>
           <Col md={6}>
-          <h3>Testimonals</h3>
+            <h3>Testimonals</h3>
             <Swiper
               modules={[Pagination]}
               spaceBetween={50}
