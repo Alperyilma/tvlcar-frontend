@@ -6,6 +6,7 @@ import MaskedInput from "react-maskedinput";
 import { useFormik } from "formik";
 import { register } from "../../../api/user-service";
 import { toast } from "react-toastify";
+import PasswordInput from "../common/password-input/password-input";
 
 const RegisterForm = ({setDefaultTab}) => {
   const [loading, setLoading] = useState(false);
@@ -29,7 +30,7 @@ const RegisterForm = ({setDefaultTab}) => {
       .test(
         "includes_",
         "Please enter your phone number",
-        (value) => !value.includes("_")
+        (value) => value && !value.includes("_")
       ),
     address: Yup.string().required("Please enter your address"),
     zipCode: Yup.string().required("Please enter your zip code"),
@@ -150,31 +151,17 @@ const RegisterForm = ({setDefaultTab}) => {
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          {...formik.getFieldProps("password")}
+        <PasswordInput {...formik.getFieldProps("password")}
           isInvalid={formik.touched.password && formik.errors.password}
           isValid={formik.touched.password && !formik.errors.password}
-        />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.password}
-        </Form.Control.Feedback>
+          error={formik.errors.password}/>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Password Confirm</Form.Label>
-        <Form.Control
-          type="password"
-          {...formik.getFieldProps("confirmPassword")}
-          isInvalid={
-            formik.touched.confirmPassword && formik.errors.confirmPassword
-          }
-          isValid={
-            formik.touched.confirmPassword && !formik.errors.confirmPassword
-          }
-        />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.confirmPassword}
-        </Form.Control.Feedback>
+        <PasswordInput {...formik.getFieldProps("confirmPassword")}
+          isInvalid={formik.touched.confirmPassword && formik.errors.confirmPassword}
+          isValid={formik.touched.confirmPassword && !formik.errors.confirmPassword}
+          error={formik.errors.confirmPassword}/>
       </Form.Group>
       <Button variant="primary" type="submit" disabled={loading}>
         {loading && <Spinner animation="border" size="sm" />} Register
