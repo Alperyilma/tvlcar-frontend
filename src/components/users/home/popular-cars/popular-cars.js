@@ -1,5 +1,5 @@
 import React from "react";
-import { Container,Row,Col } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { useStore } from "../../../../store";
 import SectionHeader from "../../common/section-header/section-header";
 import VehicleCard from "../../common/vehicle-card/vehicle-card";
@@ -17,7 +17,7 @@ const PopularCars = () => {
 
       <Container>
         <Row className="g-4">
-          {vehicles.slice(0.8).map((vehicle, index) => (
+          {vehicles.slice(0,8).map((vehicle, index) => (
             <Col key={index} md={6} lg={3}>
               <VehicleCard vehicle={vehicle} />
             </Col>

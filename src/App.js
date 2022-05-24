@@ -9,33 +9,42 @@ import { loginSuccess } from "./store/user/userActions";
 import { setVehicles } from "./store/vehicle/vehicleActions";
 
 const App = () => {
-
   const [loading, setLoading] = useState(true);
-  const { dispatchUser, dispatchVehicle } = useStore();
-  const loadData = async () => {
+  const {dispatchUser, dispatchVehicle} = useStore();
+
+  const loadData = async () =>  { 
     try {
-      let resp = await getUser();
-      dispatchUser(loginSuccess(resp.data));
-      resp = await getVehicles();
-      console.log(resp.data);
+      let resp = await getVehicles();
       dispatchVehicle(setVehicles(resp.data));
+
+      const token = localStorage.getItem("token");
+      if(token){
+        resp = await getUser();
+        dispatchUser(loginSuccess(resp.data));
+      }
+
       setLoading(false);
+      
     } catch (err) {
       console.log(err);
       setLoading(false);
     }
-  };
+  }
+
   useEffect(() => {
     loadData();
   }, []);
+  
 
-  if (loading) return <LoadingPage />;
+  if(loading) 
+    return(<LoadingPage/>)
   else
-    return (
-      <>
-        <CustomRoutes />
-        <ToastContainer />
-      </>
-    );
-};
+  return (
+    <>
+      <CustomRoutes/>
+      <ToastContainer />
+    </>
+  );
+}
+
 export default App;

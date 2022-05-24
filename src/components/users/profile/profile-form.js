@@ -38,8 +38,10 @@ const ProfileForm = ({user}) => {
 
     try {
       await updateProfile(values);
+      
       toast("Your profile updated successfully");
       setLoading(false);
+
     } catch (err) {
       toast(err.response.data.message);
       setLoading(false);
@@ -116,7 +118,7 @@ const ProfileForm = ({user}) => {
           {formik.errors.zipCode}
         </Form.Control.Feedback>
       </Form.Group>
-
+      
       <Form.Group className="mb-3">
         <Form.Label>Email address</Form.Label>
         <Form.Control
@@ -130,7 +132,7 @@ const ProfileForm = ({user}) => {
           {formik.errors.email}
         </Form.Control.Feedback>
       </Form.Group>
-
+      
       <Button variant="primary" type="submit" disabled={loading}>
         {loading && <Spinner animation="border" size="sm" />} Update
       </Button>

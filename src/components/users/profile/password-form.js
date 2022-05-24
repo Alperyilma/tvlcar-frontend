@@ -6,7 +6,7 @@ import { updatePassword } from "../../../api/user-service";
 import { toast } from "react-toastify";
 import PasswordInput from "../common/password-input/password-input";
 
-const PasswordForm = ({ setDefaultTab }) => {
+const PasswordForm = () => {
   const [loading, setLoading] = useState(false);
 
   const initialValues = {
@@ -16,18 +16,16 @@ const PasswordForm = ({ setDefaultTab }) => {
   };
 
   const validationSchema = Yup.object({
-    oldPassword: Yup.string()
-      .email()
-      .required("Please enter your current password"),
+    oldPassword: Yup.string().required("Please enter your current password"),
     newPassword: Yup.string()
-      .required("Please enter your password")
+      .required("Please enter your new password")
       .min(8, "Must be at least 8 characters")
       .matches(/[a-z]+/, "One lowercase character")
       .matches(/[A-Z]+/, "One uppercase character")
       .matches(/[@$!%*#?&]+/, "One special character")
       .matches(/\d+/, "One number"),
     confirmNewPassword: Yup.string()
-      .required("Please re-enter your password")
+      .required("Please re-enter your new password")
       .oneOf([Yup.ref("newPassword")], "Password fields doesn't match"),
   });
 
@@ -35,7 +33,7 @@ const PasswordForm = ({ setDefaultTab }) => {
     setLoading(true);
 
     try {
-      const resp = await updatePassword(values);
+      await updatePassword(values);
       toast("Your password was updated successfully");
       setLoading(false);
       formik.resetForm();
@@ -53,8 +51,6 @@ const PasswordForm = ({ setDefaultTab }) => {
 
   return (
     <Form noValidate onSubmit={formik.handleSubmit}>
-      
-
       <Form.Group className="mb-3">
         <Form.Label>Current Password</Form.Label>
         <PasswordInput
@@ -66,7 +62,7 @@ const PasswordForm = ({ setDefaultTab }) => {
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label>Old Password</Form.Label>
+        <Form.Label>New Password</Form.Label>
         <PasswordInput
           {...formik.getFieldProps("newPassword")}
           isInvalid={formik.touched.newPassword && formik.errors.newPassword}
@@ -75,21 +71,22 @@ const PasswordForm = ({ setDefaultTab }) => {
         />
       </Form.Group>
 
-
-
       <Form.Group className="mb-3">
         <Form.Label>Password Confirm</Form.Label>
         <PasswordInput
           {...formik.getFieldProps("confirmNewPassword")}
           isInvalid={
-            formik.touched.confirmNewPassword && formik.errors.confirmNewPassword
+            formik.touched.confirmNewPassword &&
+            formik.errors.confirmNewPassword
           }
           isValid={
-            formik.touched.confirmNewPassword && !formik.errors.confirmNewPassword
+            formik.touched.confirmNewPassword &&
+            !formik.errors.confirmNewPassword
           }
           error={formik.errors.confirmNewPassword}
         />
       </Form.Group>
+
       <Button variant="primary" type="submit" disabled={loading}>
         {loading && <Spinner animation="border" size="sm" />} Update
       </Button>

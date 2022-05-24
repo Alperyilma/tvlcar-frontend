@@ -2,14 +2,16 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { RiGasStationFill, RiCarLine, RiCaravanLine } from "react-icons/ri";
 import { IoIosSnow } from "react-icons/io";
-import "./vehicle-card.css"
+import "./vehicle-card.css";
+import { useNavigate } from "react-router-dom";
 
 const VehicleCard = ({ vehicle }) => {
-  const { image, pricePerHour, model, fuelType, airConditioning, doors, luggage } = vehicle;
+  const { id, image, pricePerHour, model, fuelType, airConditioning, doors, luggage } = vehicle;
   const imageSrc = `${process.env.REACT_APP_API_URL}/files/display/${image[0]}`;
+  const navigate = useNavigate();
 
   return (
-    <Card className="vehicle-card">
+    <Card className="vehicle-card" onClick={()=> navigate(`/vehicles/${id}`)}>
       <div className="image-container">
         <Card.Img variant="top" src={imageSrc} />
         <span className="price">
@@ -19,22 +21,22 @@ const VehicleCard = ({ vehicle }) => {
 
       <Card.Body>
         <Card.Title>{model}</Card.Title>
-        <Card.Text>
-          <ul>
-            <li>
+        <div>
+          <ul className="row g-1">
+            <li className="col-6">
               <RiGasStationFill /> {fuelType}
             </li>
-            <li>
+            <li className="col-6">
               <IoIosSnow /> {airConditioning ? "AC exists" : "AC not exists"}
             </li>
-            <li>
+            <li className="col-6">
               <RiCarLine /> {doors} doors
             </li>
-            <li>
+            <li className="col-6">
               <RiCaravanLine /> {luggage} lt
             </li>
           </ul>
-        </Card.Text>
+        </div>
       </Card.Body>
     </Card>
   );

@@ -13,6 +13,8 @@ const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { dispatchUser } = useStore();
+
+
   const initialValues = {
     email: "",
     password: "",
@@ -24,31 +26,34 @@ const LoginForm = () => {
   });
 
   const onSubmit = (values) => {
+
     setLoading(true);
 
-    login(values)
-      .then((respLogin) => {
-        localStorage.setItem("token", respLogin.data.token);
+    login(values).then( respLogin => {
 
-        getUser()
-          .then((respUser) => {
-            console.log(respUser);
+      localStorage.setItem("token", respLogin.data.token);
 
-            setLoading(false);
-            dispatchUser(loginSuccess(respUser.data));
-            navigate(-1);
-          })
-          .catch((err) => {
-            console.log(err);
-            toast(err.response.data.message);
-            setLoading(false);
-          });
+      getUser().then( respUser=> {
+        console.log(respUser);
+
+        setLoading(false);
+        dispatchUser(loginSuccess(respUser.data));
+        navigate(-1);
       })
-      .catch((err) => {
+      .catch( err=>{
         console.log(err);
         toast(err.response.data.message);
         setLoading(false);
-      });
+      })
+      
+    })
+    .catch( err=>   {
+      console.log(err);
+      toast(err.response.data.message);
+      setLoading(false);
+    })
+
+
   };
 
   const formik = useFormik({
@@ -73,15 +78,13 @@ const LoginForm = () => {
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Password</Form.Label>
-        <PasswordInput
-          {...formik.getFieldProps("password")}
+        <PasswordInput {...formik.getFieldProps("password")}
           isInvalid={formik.touched.password && formik.errors.password}
           isValid={formik.touched.password && !formik.errors.password}
-          error={formik.errors.password}
-        />
+          error={formik.errors.password}/>
       </Form.Group>
       <Button variant="primary" type="submit" disabled={loading}>
-        {loading && <Spinner animation="border" size="sm" />} Login
+        {loading && <Spinner animation="border" size="sm"/>}  Login
       </Button>
     </Form>
   );
