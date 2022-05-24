@@ -1,41 +1,41 @@
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { getUser } from "./api/user-service";
+import { getVehicles } from "./api/vehicle-service";
 import LoadingPage from "./pages/users/LoadingPage";
 import CustomRoutes from "./router/custom-routes";
 import { useStore } from "./store";
 import { loginSuccess } from "./store/user/userActions";
+import { setVehicles } from "./store/vehicle/vehicleActions";
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
-  const {dispatchUser} = useStore();
 
-  const loadData = async () =>  { 
+  const [loading, setLoading] = useState(true);
+  const { dispatchUser, dispatchVehicle } = useStore();
+  const loadData = async () => {
     try {
-      const resp = await getUser();
+      let resp = await getUser();
       dispatchUser(loginSuccess(resp.data));
+      resp = await getVehicles();
+      console.log(resp.data);
+      dispatchVehicle(setVehicles(resp.data));
       setLoading(false);
-      
     } catch (err) {
       console.log(err);
       setLoading(false);
     }
-  }
-
+  };
   useEffect(() => {
     loadData();
   }, []);
-  
 
-  if(loading) 
-    return(<LoadingPage/>)
+  if (loading) return <LoadingPage />;
   else
-  return (
-    <>
-      <CustomRoutes/>
-      <ToastContainer />
-    </>
-  );
-}
-
+    return (
+      <>
+        <CustomRoutes />
+        <ToastContainer />
+      </>
+    );
+};
 export default App;
