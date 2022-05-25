@@ -1,77 +1,54 @@
-import { Button, Spinner } from "react-bootstrap";
-import React, { useState } from "react";
+import React from "react";
 import {
-  Col,
   Container,
   Form,
   Row,
+  Col,
   FloatingLabel,
   InputGroup,
+  Button,
 } from "react-bootstrap";
-import SectionHeader from "../common/section-header/section-header";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import MaskedInput from "react-maskedinput";
-import { useFormik } from "formik";
-import { toast } from "react-toastify";
-import Spacer from "../common/spacer/spacer";
+import SectionHeader from "../common/section-header/section-header";
 
-const VehicleBookingForm = () => {
-  const [loading, setLoading] = useState(false);
-
+const VehicleBookingForm = ({ vehicle }) => {
   const initialValues = {
+    car: "",
     pickUpLocation: "",
-    dropOffLocation: "",
+    dropOfLocation: "",
     pickUpDate: "",
-    time: "",
+    pickUpTime: "",
     dropOffDate: "",
-    cardNumber: "",
+    dropOffTime: "",
+    cardNo: "",
     nameOnCard: "",
     expireDate: "",
     cvc: "",
+    contract: false,
   };
 
   const validationSchema = Yup.object({
-    pickUpLocation: Yup.string().required("Please enter your pick up location"),
-    dropOffLocation: Yup.string().required(
-      "Please enter your drop off location"
+    pickUpLocation: Yup.string().required("Enter a pick up place please."),
+    dropOfLocation: Yup.string().required("Enter a drop off place please."),
+    pickUpDate: Yup.string().required("Select a pick up date please."),
+    pickUpTime: Yup.string().required("Select a pick up time please."),
+    dropOffDate: Yup.string().required("Select a drop off date please."),
+    dropOffTime: Yup.string().required("Select a drop off time please."),
+    cardNo: Yup.string().required("Please enter the card number"),
+    nameOnCard: Yup.string().required("Please enter the name of card"),
+    expireDate: Yup.string().required("Please enter the expire date"),
+    cvc: Yup.number()
+      .typeError("Must be number")
+      .required("Please enter the cvc"),
+    contract: Yup.boolean().oneOf(
+      [true],
+      "Please read the contract and check the box"
     ),
-    pickUpDate: Yup.string().required("Please enter your pick up date"),
-    time: Yup.string().required("Please enter your time"),
-    dropOffDate: Yup.string().required("Please enter your drop off date"),
-    cardNumber: Yup.string()
-      .required()
-      .length(19, "Please enter your card number")
-      .test(
-        "includes_",
-        "Please enter your phone number",
-        (value) => value && !value.includes("_")
-      ),
-    nameOnCard: Yup.string().required("Please enter your name on card"),
-    expireDate: Yup.string()
-      .required()
-      .test(
-        "includes_",
-        "Please enter your phone number",
-        (value) => value && !value.includes("_")
-      )
-      .length(5, "Please enter your expire date"),
-    cvc: Yup.string().required("Please enter your cvc"),
   });
 
-  const onSubmit = async (values) => {
-    setLoading(true);
-
-    // try {
-    //   const resp = await register(values);
-    //   toast("You are registered successfully");
-    //   setLoading(false);
-    //   formik.resetForm();
-    //   setDefaultTab("login");
-    // } catch (err) {
-    //   toast(err.response.data.message);
-    //   setLoading(false);
-    // }
-  };
+  const onSubmit = (values) => {};
 
   const formik = useFormik({
     initialValues,
@@ -95,10 +72,6 @@ const VehicleBookingForm = () => {
                     formik.touched.pickUpLocation &&
                     formik.errors.pickUpLocation
                   }
-                  isValid={
-                    formik.touched.pickUpLocation &&
-                    !formik.errors.pickUpLocation
-                  }
                 />
                 <Form.Control.Feedback type="invalid">
                   {formik.errors.pickUpLocation}
@@ -109,18 +82,14 @@ const VehicleBookingForm = () => {
                 <Form.Control
                   type="text"
                   placeholder="Dropoff Location"
-                  {...formik.getFieldProps("dropOffLocation")}
+                  {...formik.getFieldProps("dropOfLocation")}
                   isInvalid={
-                    formik.touched.dropOffLocation &&
-                    formik.errors.dropOffLocation
-                  }
-                  isValid={
-                    formik.touched.dropOffLocation &&
-                    !formik.errors.dropOffLocation
+                    formik.touched.dropOfLocation &&
+                    formik.errors.dropOfLocation
                   }
                 />
                 <Form.Control.Feedback type="invalid">
-                  {formik.errors.dropOffLocation}
+                  {formik.errors.dropOfLocation}
                 </Form.Control.Feedback>
               </FloatingLabel>
 
@@ -133,9 +102,6 @@ const VehicleBookingForm = () => {
                     isInvalid={
                       formik.touched.pickUpDate && formik.errors.pickUpDate
                     }
-                    isValid={
-                      formik.touched.pickUpDate && !formik.errors.pickUpDate
-                    }
                   />
                   <Form.Control.Feedback type="invalid">
                     {formik.errors.pickUpDate}
@@ -146,12 +112,13 @@ const VehicleBookingForm = () => {
                   <Form.Control
                     type="time"
                     placeholder="Pickup Time"
-                    {...formik.getFieldProps("time")}
-                    isInvalid={formik.touched.time && formik.errors.time}
-                    isValid={formik.touched.time && !formik.errors.time}
+                    {...formik.getFieldProps("pickUpTime")}
+                    isInvalid={
+                      formik.touched.pickUpTime && formik.errors.pickUpTime
+                    }
                   />
                   <Form.Control.Feedback type="invalid">
-                    {formik.errors.time}
+                    {formik.errors.pickUpTime}
                   </Form.Control.Feedback>
                 </FloatingLabel>
               </InputGroup>
@@ -165,9 +132,6 @@ const VehicleBookingForm = () => {
                     isInvalid={
                       formik.touched.dropOffDate && formik.errors.dropOffDate
                     }
-                    isValid={
-                      formik.touched.dropOffDate && !formik.errors.dropOffDate
-                    }
                   />
                   <Form.Control.Feedback type="invalid">
                     {formik.errors.dropOffDate}
@@ -178,34 +142,29 @@ const VehicleBookingForm = () => {
                   <Form.Control
                     type="time"
                     placeholder="Dropoff Time"
-                    {...formik.getFieldProps("time")}
-                    isInvalid={formik.touched.time && formik.errors.time}
-                    isValid={formik.touched.time && !formik.errors.time}
+                    {...formik.getFieldProps("dropOffTime")}
+                    isInvalid={
+                      formik.touched.dropOffTime && formik.errors.dropOffTime
+                    }
                   />
                   <Form.Control.Feedback type="invalid">
-                    {formik.errors.time}
+                    {formik.errors.dropOffTime}
                   </Form.Control.Feedback>
                 </FloatingLabel>
               </InputGroup>
             </Col>
-
             <Col md={6}>
               <FloatingLabel label="Card Number" className="mb-3">
                 <Form.Control
                   type="text"
-                  placeholder="####-####-####-####"
+                  placeholder="Card Number"
                   as={MaskedInput}
                   mask="1111-1111-1111-1111"
-                  {...formik.getFieldProps("cardNumber")}
-                  isInvalid={
-                    formik.touched.cardNumber && formik.errors.cardNumber
-                  }
-                  isValid={
-                    formik.touched.cardNumber && !formik.errors.cardNumber
-                  }
+                  {...formik.getFieldProps("cardNo")}
+                  isInvalid={formik.touched.cardNo && formik.errors.cardNo}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {formik.errors.cardNumber}
+                  {formik.errors.cardNo}
                 </Form.Control.Feedback>
               </FloatingLabel>
 
@@ -217,9 +176,6 @@ const VehicleBookingForm = () => {
                   isInvalid={
                     formik.touched.nameOnCard && formik.errors.nameOnCard
                   }
-                  isValid={
-                    formik.touched.nameOnCard && !formik.errors.nameOnCard
-                  }
                 />
                 <Form.Control.Feedback type="invalid">
                   {formik.errors.nameOnCard}
@@ -230,15 +186,12 @@ const VehicleBookingForm = () => {
                 <FloatingLabel label="Expire Date" className="flex-grow-1">
                   <Form.Control
                     type="text"
+                    placeholder="Expire Date"
                     as={MaskedInput}
                     mask="11/11"
-                    placeholder="12/12"
                     {...formik.getFieldProps("expireDate")}
                     isInvalid={
                       formik.touched.expireDate && formik.errors.expireDate
-                    }
-                    isValid={
-                      formik.touched.expireDate && !formik.errors.expireDate
                     }
                   />
                   <Form.Control.Feedback type="invalid">
@@ -254,7 +207,6 @@ const VehicleBookingForm = () => {
                     mask="111"
                     {...formik.getFieldProps("cvc")}
                     isInvalid={formik.touched.cvc && formik.errors.cvc}
-                    isValid={formik.touched.cvc && !formik.errors.cvc}
                   />
                   <Form.Control.Feedback type="invalid">
                     {formik.errors.cvc}
@@ -266,16 +218,12 @@ const VehicleBookingForm = () => {
                 type="checkbox"
                 label="I have read and aggree the sales contract"
                 id="contract"
+                {...formik.getFieldProps("contract")}
+                isInvalid={formik.touched.contract && formik.errors.contract}
               />
             </Col>
             <Col className="text-center">
-              <Button
-                variant="primary"
-                size="lg"
-                type="submit"
-                disabled={loading}
-              >
-                {loading && <Spinner animation="border" size="sm" />}
+              <Button variant="primary" size="lg" type="submit">
                 Book Now
               </Button>
             </Col>

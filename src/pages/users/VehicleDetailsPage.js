@@ -12,11 +12,10 @@ const VehicleDetailsPage = () => {
   const { vehicles } = vehicleState;
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     const selectedVehicles = vehicles.filter( item => item.id == vehicleId);
-    if(selectedVehicles.length<=0) return navigate("*");
+    if(selectedVehicles.length<=0) navigate("/vehicle-not-found");
     setSelectedVehicle(selectedVehicles[0]);
   }, [])
   
@@ -28,7 +27,7 @@ const VehicleDetailsPage = () => {
     <Spacer/>
     <VehicleDetails vehicle={selectedVehicle}/>
     <Spacer/>
-    <VehicleBookingForm/>
+    <VehicleBookingForm vehicle={selectedVehicle}/>
     <Spacer/>
     </>
   )

@@ -37,35 +37,27 @@ const VehicleDetails = ({ vehicle }) => {
         <Col md={6}>
           <ul>
             <li>
-              <RiGasStationFill />
-              {fuelType}
+              <RiGasStationFill /> {fuelType}
             </li>
             {airConditioning && (
               <li>
-                <IoIosSnow />
-                Air Conditioning
+                <IoIosSnow /> Air Conditioning
               </li>
             )}
-
             <li>
-              <RiCarLine />
-              {doors} doors
+              <RiCarLine /> {doors} doors
             </li>
             <li>
-              <RiCaravanLine />
-              {luggage} lt
+              <RiCaravanLine /> {luggage} lt
             </li>
             <li>
-              <MdOutlineAirlineSeatReclineExtra />
-              {seats} lt
+              <MdOutlineAirlineSeatReclineExtra /> {seats} seats
             </li>
             <li>
-              <GiJoystick />
-              {transmission}
+              <GiJoystick /> {transmission} transmission
             </li>
             <li>
-              <GiCalendarHalfYear />
-              Age {age}
+              <GiCalendarHalfYear /> Age {age}
             </li>
           </ul>
         </Col>
