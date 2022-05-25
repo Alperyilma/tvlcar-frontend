@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Redirect } from "react-router-dom";
+import Error404 from "../components/users/common/error/user/error-404";
 import AboutPage from "../pages/users/AboutPage";
 import AuthPage from "../pages/users/AuthPage";
 import ContactPage from "../pages/users/ContactPage";
@@ -23,6 +24,8 @@ const CustomRoutes = () => {
           <Route path="about" element={<UserTemplate><AboutPage /></UserTemplate>} />
           <Route path="contact" element={<UserTemplate><ContactPage /></UserTemplate>} />
           <Route path="auth" element={<AuthPage />} />
+          <Route path="*" element={<Error404/>}/>
+         
 
           <Route path="vehicles">
             <Route index element={<UserTemplate><VehiclesPage /></UserTemplate>} />

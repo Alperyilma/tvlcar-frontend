@@ -21,7 +21,7 @@ const Footer = () => {
             <SocialBar/>
           </Col>
           
-          <Col md={3}>
+          <Col md={3} >
             <h4>Quick Links</h4>
             <ul>
               <li>

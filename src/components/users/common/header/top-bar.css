@@ -19,6 +19,10 @@
 .social-bar a {
   color: white;
 }
+.contact-bar a:hover,
+.social-bar a:hover {
+  color: var(--color1);
+}
 
 .contact-bar {
   list-style: none;

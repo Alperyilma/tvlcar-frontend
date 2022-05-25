@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Col, Container, Row, Tab, Tabs } from "react-bootstrap";
 import "./auth.css";
 import logo from "../../../assets/img/logo/logo.png";
-import { RiCloseCircleLine } from "react-icons/ri";
+import { RiArrowGoBackFill,RiHome2Line } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "./login-form";
 import RegisterForm from "./register-form";
@@ -15,10 +15,15 @@ const Auth = () => {
     <Container fluid className="auth">
       <Row>
         <Col md={7}>
-          <img src={logo} alt="TRVLCar"/>
-          <RiCloseCircleLine
+          <img src={logo} alt="TRVLCar" />
+          <RiArrowGoBackFill
             className="close-btn"
             onClick={() => navigate(-1)}
+          />
+
+          <RiHome2Line 
+            className="close-btn"
+            onClick={() => navigate("/")}
           />
         </Col>
         <Col md={5}>
@@ -33,7 +38,7 @@ const Auth = () => {
                   <LoginForm />
                 </Tab>
                 <Tab eventKey="register" title="Register">
-                  <RegisterForm setDefaultTab={setDefaultTab}/>
+                  <RegisterForm setDefaultTab={setDefaultTab} />
                 </Tab>
               </Tabs>
             </Card.Body>
