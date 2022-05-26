@@ -20,4 +20,16 @@ const createReservation = (reservation) => {
   });
 };
 
-export { isVehicleAvailable, createReservation };
+const getReservations = () => {
+  return axios.get(`${API_URL}/reservations/auth/all`, {
+    headers: authHeader(),
+  });
+};
+
+const getReservation = (id) => {
+  return axios.get(`${API_URL}/reservations/${id}/auth`, {
+    headers: authHeader(),
+  });
+};
+
+export { isVehicleAvailable, createReservation, getReservations, getReservation };

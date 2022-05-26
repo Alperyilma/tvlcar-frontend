@@ -20,10 +20,6 @@
   color: white;
 }
 
-.topbar a:hover{
-  color: var(--color1);
-}
-
 .contact-bar {
   list-style: none;
   display: flex;
