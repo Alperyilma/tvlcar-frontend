@@ -11,3 +11,7 @@
 .footer a{
     color:rgb(206, 206, 206);
 }
+
+.footer a:hover{
+    color: var(--color1);
+}
