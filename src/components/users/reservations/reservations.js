@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Spinner, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { getReservations } from "../../../api/reservation-service";
+
 const Reservations = () => {
   const [loading, setLoading] = useState(true);
   const [reservations, setReservations] = useState([]);
@@ -27,6 +28,7 @@ const Reservations = () => {
   useEffect(() => {
     loadData();
   }, []);
+
   return (
     <Container>
       <Table striped bordered hover>
@@ -47,8 +49,9 @@ const Reservations = () => {
               </td>
             </tr>
           )}
+
           {reservations.map((reservation, index) => (
-            <tr key={index} onClick={()=>handleClick(reservation.id)}>
+            <tr key={index} onClick={ ()=>handleClick(reservation.id)}>
               <td>{index + 1}</td>
               <td>{reservation.car.model}</td>
               <td>{moment(reservation.pickUpTime).format("llll")}</td>
@@ -57,7 +60,7 @@ const Reservations = () => {
             </tr>
           ))}
 
-          {!loading && reservations.length <= 0 && (
+          { !loading && reservations.length <= 0 && (
             <tr className="table-warning">
               <td colSpan={5}>No reservation</td>
             </tr>
@@ -67,4 +70,5 @@ const Reservations = () => {
     </Container>
   );
 };
+
 export default Reservations;

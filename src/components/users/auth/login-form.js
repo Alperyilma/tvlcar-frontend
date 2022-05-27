@@ -24,7 +24,7 @@ const LoginForm = () => {
     password: Yup.string().required("Please enter your password"),
   });
 
-  const onSubmit = async (values) => {
+  const onSubmit =  async (values) => {
     setLoading(true);
 
     try {
@@ -33,12 +33,16 @@ const LoginForm = () => {
       resp = await getUser();
       dispatchUser(loginSuccess(resp.data));
       navigate(-1);
+
     } catch (err) {
       console.log(err);
       toast(err.response.data.message);
-    } finally {
+    }
+    finally{
       setLoading(false);
     }
+
+    
   };
 
   const formik = useFormik({

@@ -5,17 +5,14 @@ import Spacer from "../../components/users/common/spacer/spacer";
 import ReservationDetails from "../../components/users/reservations/reservation-details";
 
 const UserReservationDetailsPage = () => {
-
-const {reservationId} = useParams();
-
-
+  const { reservationId } = useParams();
 
   return (
     <>
       <PageHeader title="Reservation Details" />
       <Spacer />
-      <ReservationDetails reservationId={reservationId}/>
-      <Spacer/>
+      <ReservationDetails reservationId={reservationId} />
+      <Spacer />
     </>
   );
 };

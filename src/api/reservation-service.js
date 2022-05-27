@@ -14,7 +14,7 @@ const isVehicleAvailable = (dto) => {
 const createReservation = (reservation) => {
   const { carId } = reservation;
   delete reservation.carId;
-  
+
   return axios.post(`${API_URL}/reservations/add?carId=${carId}`, reservation, {
     headers: authHeader(),
   });
