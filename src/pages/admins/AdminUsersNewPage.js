@@ -1,12 +1,10 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import AdminAddNewUser from '../../components/admins/users/admin-add-new-user'
+import AdminUserNew from '../../components/admins/users/admin-user-new'
 
 const AdminUsersNewPage = () => {
   return (
-    <Container>
-      <AdminAddNewUser/>
-    </Container>
+    <Container><AdminUserNew/></Container>
   )
 }
 

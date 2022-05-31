@@ -91,7 +91,7 @@ const AdminUsers = () => {
     <div>
       <ButtonGroup aria-label="Basic example">
         <Button variant="primary" as={Link} to="/admin/users/new">New User</Button>
-        <Button style={{marginLeft:"1rem"}}
+        <Button
           variant="secondary"
           onClick={handleDownload}
           disabled={loadingDownload}
