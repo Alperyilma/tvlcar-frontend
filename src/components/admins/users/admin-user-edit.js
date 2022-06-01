@@ -10,6 +10,7 @@ import {
   ButtonGroup,
   Alert,
 } from "react-bootstrap";
+
 import MaskedInput from "react-maskedinput";
 import { useNavigate, useParams } from "react-router-dom";
 import {
@@ -19,6 +20,7 @@ import {
 } from "../../../api/admin-user-service";
 import { toast } from "react-toastify";
 import alertify from "alertifyjs";
+
 const AdminUserEdit = () => {
   const [initialValues, setInitialValues] = useState({
     firstName: "",
@@ -32,11 +34,14 @@ const AdminUserEdit = () => {
     roles: [],
     builtIn: false,
   });
+
+
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const { userId } = useParams();
   const navigate = useNavigate();
+
   const validationSchema = Yup.object({
     firstName: Yup.string().required("Please enter your first name"),
     lastName: Yup.string().required("Please enter your last name"),
@@ -46,12 +51,16 @@ const AdminUserEdit = () => {
     zipCode: Yup.string().required("Please enter your zip code"),
     roles: Yup.array().required("Please select a role"),
   });
+
   const onSubmit = async (values) => {
     setSaving(true);
+
     const data = { ...values };
+
     if (!data.password) {
       delete data.password;
     }
+
     try {
       await updateUser(userId, data);
       toast("User was updated successfully");
@@ -62,12 +71,14 @@ const AdminUserEdit = () => {
       setSaving(false);
     }
   };
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues,
     validationSchema,
     onSubmit,
   });
+
   const loadData = async () => {
     try {
       const resp = await getUser(userId);
@@ -80,6 +91,7 @@ const AdminUserEdit = () => {
       setLoading(false);
     }
   };
+
   const removeUser = async () => {
     setDeleting(true);
     try {
@@ -93,6 +105,7 @@ const AdminUserEdit = () => {
       setDeleting(false);
     }
   };
+
   const handleDelete = () => {
     alertify.confirm(
       "Deleting",
@@ -103,9 +116,11 @@ const AdminUserEdit = () => {
       () => {}
     );
   };
+
   useEffect(() => {
     loadData();
   }, []);
+
   return (
     <Form noValidate onSubmit={formik.handleSubmit}>
       <Row>
@@ -121,6 +136,7 @@ const AdminUserEdit = () => {
             {formik.errors.firstName}
           </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group as={Col} md={4} lg={3} className="mb-3">
           <Form.Label>Last Name</Form.Label>
           <Form.Control
@@ -133,6 +149,7 @@ const AdminUserEdit = () => {
             {formik.errors.lastName}
           </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group as={Col} md={4} lg={3} className="mb-3">
           <Form.Label>Phone Number</Form.Label>
           <Form.Control
@@ -147,6 +164,7 @@ const AdminUserEdit = () => {
             {formik.errors.phoneNumber}
           </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group as={Col} md={4} lg={3} className="mb-3">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -156,6 +174,7 @@ const AdminUserEdit = () => {
             disabled
           />
         </Form.Group>
+
         <Form.Group as={Col} md={4} lg={3} className="mb-3">
           <Form.Label>Address</Form.Label>
           <Form.Control
@@ -168,6 +187,7 @@ const AdminUserEdit = () => {
             {formik.errors.address}
           </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group as={Col} md={4} lg={3} className="mb-3">
           <Form.Label>Zip Code</Form.Label>
           <Form.Control
@@ -180,6 +200,7 @@ const AdminUserEdit = () => {
             {formik.errors.zipCode}
           </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group as={Col} md={4} lg={3} className="mb-3">
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -192,15 +213,16 @@ const AdminUserEdit = () => {
             {formik.errors.password}
           </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group as={Col} md={4} lg={3} className="mb-3">
           <Form.Label>Roles</Form.Label>
+
           <div className="mb-3">
             <Form.Check
               inline
               label="Customer"
               type="checkbox"
               name="roles"
-              id="customer"
               value="Customer"
               checked={formik.values.roles.includes("Customer")}
               onChange={formik.handleChange}
@@ -210,7 +232,6 @@ const AdminUserEdit = () => {
               label="Admin"
               type="checkbox"
               name="roles"
-              id="admin"
               value="Administrator"
               checked={formik.values.roles.includes("Administrator")}
               onChange={formik.handleChange}
