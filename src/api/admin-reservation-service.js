@@ -4,32 +4,21 @@ import authHeader from "./auth-header";
 const API_URL = process.env.REACT_APP_API_URL;
 
 const getReservations = () => {
-  return axios.get(`${API_URL}/reservations/admin/all`, {
-    headers: authHeader(),
-  });
+  return axios.get(`${API_URL}/reservations/admin/all`, { headers: authHeader() });
 };
 
 const getReservation = (id) => {
-  return axios.get(`${API_URL}/reservations/${id}/admin`, {
-    headers: authHeader(),
-  });
+  return axios.get(`${API_URL}/reservations/${id}/admin`, { headers: authHeader() });
 };
 
 const deleteReservation = (id) => {
-  return axios.delete(`${API_URL}/reservations/admin/${id}/auth`, {
-    headers: authHeader(),
-  });
+  return axios.delete(`${API_URL}/reservations/admin/${id}/auth`, { headers: authHeader() });
 };
 
 const updateReservation = (id, carId, reservation) => {
-  return axios.put(
-    `${API_URL}/reservations/admin/auth?carId=${carId}&reservationId={id}`,
-    reservation,
-    {
-      headers: authHeader(),
-    }
-  );
+  return axios.put(`${API_URL}/reservations/admin/auth?carId=${carId}&reservationId=${id}`, reservation, { headers: authHeader() });
 };
+
 
 const downloadReservations = () => {
   return axios.get(`${API_URL}/excel/download/reservations`, {
@@ -38,14 +27,11 @@ const downloadReservations = () => {
       "Content-Type":
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     },
-    responseType: "blob",
+    responseType: 'blob'
   });
 };
 
-export {
-  getReservations,
-  downloadReservations,
-  getReservation,
-  deleteReservation,
-  updateReservation,
-};
+
+
+
+export { getReservations, getReservation, deleteReservation, updateReservation, downloadReservations };

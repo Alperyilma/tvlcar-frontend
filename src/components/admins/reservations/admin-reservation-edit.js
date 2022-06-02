@@ -10,6 +10,7 @@ import {
   ButtonGroup,
   InputGroup,
 } from "react-bootstrap";
+
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   deleteReservation,
@@ -20,6 +21,7 @@ import moment from "moment";
 import { useStore } from "../../../store";
 import alertify from "alertifyjs";
 import { toast } from "react-toastify";
+
 const AdminReservationEdit = () => {
   const [initialValues, setInitialValues] = useState({
     pickUpLocation: "",
@@ -39,6 +41,7 @@ const AdminReservationEdit = () => {
   const { vehicleState } = useStore();
   const { vehicles } = vehicleState;
   const statusData = ["CREATED", "CANCELED", "DONE"];
+
   const validationSchema = Yup.object({
     car: Yup.number().required("Select a car"),
     pickUpLocation: Yup.string().required("Enter the pick up place"),
@@ -49,6 +52,7 @@ const AdminReservationEdit = () => {
     dropOffTime: Yup.string().required("Select the drop off time"),
     status: Yup.string().required("Select a status"),
   });
+
   const onSubmit = async (values) => {
     setSaving(true);
     try {
@@ -61,6 +65,7 @@ const AdminReservationEdit = () => {
         dropOfLocation,
         status,
       } = values;
+
       const reservationDto = {
         pickUpTime: formatDateTime(pickUpDate, pickUpTime),
         dropOfTime: formatDateTime(dropOffDate, dropOffTime),
@@ -68,6 +73,7 @@ const AdminReservationEdit = () => {
         dropOfLocation: dropOfLocation,
         status: status,
       };
+
       await updateReservation(reservationId, values.car, reservationDto);
       toast("Reservation updated successfully");
     } catch (err) {
@@ -77,12 +83,14 @@ const AdminReservationEdit = () => {
       setSaving(false);
     }
   };
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues,
     validationSchema,
     onSubmit,
   });
+
   const removeReservation = async () => {
     try {
       setDeleting(true);
@@ -95,6 +103,7 @@ const AdminReservationEdit = () => {
       setDeleting(false);
     }
   };
+
   const handleDelete = () => {
     alertify.confirm(
       "Delete",
@@ -105,10 +114,12 @@ const AdminReservationEdit = () => {
       () => {}
     );
   };
+
   const loadData = async () => {
     try {
       const resp = await getReservation(reservationId);
       console.log(resp.data);
+
       const {
         pickUpLocation,
         dropOfLocation,
@@ -118,6 +129,7 @@ const AdminReservationEdit = () => {
         status,
         userId,
       } = resp.data;
+
       const reservationDto = {
         pickUpLocation: pickUpLocation,
         dropOfLocation: dropOfLocation,
@@ -129,18 +141,22 @@ const AdminReservationEdit = () => {
         status: status,
         userId: userId,
       };
+
       setInitialValues(reservationDto);
     } catch (err) {
       console.log(err);
     } finally {
     }
   };
+
   useEffect(() => {
     loadData();
   }, []);
+
   const formatDateTime = (date, time) => {
     return moment(`${date} ${time}`).format("MM/DD/YYYY HH:mm:ss");
   };
+
   return (
     <Form noValidate onSubmit={formik.handleSubmit}>
       <Row>
@@ -157,6 +173,7 @@ const AdminReservationEdit = () => {
             {formik.errors.pickUpLocation}
           </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group as={Col} md={4} lg={3} className="mb-3">
           <Form.Label>Drop-Off Location</Form.Label>
           <Form.Control
@@ -169,6 +186,7 @@ const AdminReservationEdit = () => {
             {formik.errors.dropOfLocation}
           </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group as={Col} md={4} lg={3} className="mb-3">
           <Form.Label>Pick Up Time</Form.Label>
           <InputGroup className="mb-3">
@@ -187,6 +205,7 @@ const AdminReservationEdit = () => {
             {formik.errors.pickUpDate || formik.errors.pickUpTime}
           </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group as={Col} md={4} lg={3} className="mb-3">
           <Form.Label>Drop Off Time</Form.Label>
           <InputGroup className="mb-3">
@@ -205,6 +224,7 @@ const AdminReservationEdit = () => {
             {formik.errors.dropOffDate || formik.errors.dropOffTime}
           </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group as={Col} md={4} lg={3} className="mb-3">
           <Form.Label>Vehicle</Form.Label>
           <Form.Select
@@ -221,6 +241,7 @@ const AdminReservationEdit = () => {
             {formik.errors.car}
           </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group as={Col} md={4} lg={3} className="mb-3">
           <Form.Label>Status</Form.Label>
           <Form.Select
@@ -237,6 +258,7 @@ const AdminReservationEdit = () => {
             {formik.errors.car}
           </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group as={Col} md={4} lg={3} className="mb-3">
           <Form.Label>Customer</Form.Label>
           <div>
@@ -252,6 +274,7 @@ const AdminReservationEdit = () => {
             {saving && <Spinner animation="border" variant="light" size="sm" />}{" "}
             Save
           </Button>
+
           <Button
             variant="secondary"
             type="button"
@@ -259,6 +282,7 @@ const AdminReservationEdit = () => {
           >
             Cancel
           </Button>
+
           <Button
             type="button"
             variant="danger"

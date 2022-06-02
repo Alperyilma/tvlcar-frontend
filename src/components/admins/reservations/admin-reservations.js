@@ -1,5 +1,5 @@
 import fileDownload from "js-file-download";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, ButtonGroup, Spinner } from "react-bootstrap";
 import DataTable from "react-data-table-component";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,19 +9,21 @@ const AdminReservations = () => {
   const [downloading, setDownloading] = useState(false);
   const [loading, setLoading] = useState(true);
   const [reservations, setReservations] = useState([]);
-
   const navigate = useNavigate();
 
   const handleDownload = async () => {
-    try{
-      setDownloading(true)
-      const resp = await downloadReservations()
+    try {
+      setDownloading(true);
+      const resp = await downloadReservations();
       fileDownload(resp.data, "reservations.xlsx");
-    }catch(err){
+      
+    } catch (err) {
       console.log(err);
-    }finally{
+    }
+    finally{
       setDownloading(false);
     }
+
   };
 
   const loadData = async () => {
@@ -39,10 +41,6 @@ const AdminReservations = () => {
   useEffect(() => {
     loadData();
   }, []);
-
-  const handleEdit = (row) => {
-    navigate(`/admin/reservations/${row.id}`);
-  };
 
   const columns = [
     {
@@ -64,6 +62,7 @@ const AdminReservations = () => {
       name: "Price",
       selector: (row) => row.totalPrice,
       sortable: true,
+      format: (row)=> `$ ${row.totalPrice.toLocaleString()}`
     },
     {
       name: "Status",
@@ -72,33 +71,13 @@ const AdminReservations = () => {
     },
   ];
 
-  const customStyles = {
-    rows: {
-      style: {
-        minHeight: "72px", // override the row height
-      },
-    },
-    headCells: {
-      style: {
-        paddingLeft: "8px", // override the cell padding for head cells
-        paddingRight: "8px",
-        backgroundColor: "gray",
-        color: "white",
-      },
-    },
-    cells: {
-      style: {
-        paddingLeft: "8px", // override the cell padding for data cells
-        paddingRight: "8px",
-      },
-    },
+  const handleEdit = (row) => {
+    navigate(`/admin/reservations/${row.id}`);
   };
-
 
   return (
     <div>
       <ButtonGroup aria-label="Basic example">
-        
         <Button
           variant="secondary"
           onClick={handleDownload}
@@ -116,7 +95,6 @@ const AdminReservations = () => {
         progressPending={loading}
         pagination
         onRowClicked={handleEdit}
-
       />
     </div>
   );
