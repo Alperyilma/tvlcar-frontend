@@ -12,11 +12,17 @@ import {
   Image,
   Badge,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import "./admin-vehicle.css";
+import { createVehicle, uploadVehicleImage } from "../../../api/admin-vehicle-service";
+import { toast } from "react-toastify";
 
 const AdminVehicleNew = () => {
   const [loading, setLoading] = useState(false);
   const [imageSrc, setImageSrc] = useState("");
+  const fileImageRef = useRef();
+  const navigate = useNavigate();
+
 
   const initialValues = {
     model: "",
@@ -47,7 +53,28 @@ const AdminVehicleNew = () => {
   });
 
   const onSubmit = async (values) => {
-    
+    try {
+      setLoading(true);
+      const formData = new FormData();
+      formData.append("file", values.image);
+
+      const respUpload = await uploadVehicleImage(formData);
+      const imageId = respUpload.data.imageId;
+
+      const vehicleDto = {...values};
+      delete vehicleDto["image"];
+
+      await createVehicle(imageId, vehicleDto);
+      toast("Vehicle created successfully");
+      navigate(-1);
+
+    } catch (err) {
+      toast(err.response.data.message);
+      console.log(err);
+    }
+    finally{
+      setLoading(false);
+    }
   };
 
   const formik = useFormik({
@@ -55,6 +82,29 @@ const AdminVehicleNew = () => {
     validationSchema,
     onSubmit,
   });
+
+  const handleSelectImage = () => { 
+    fileImageRef.current.click();
+  }
+
+  const handleImageChange = () => { 
+    const file = fileImageRef.current.files[0];
+    console.log(file);
+    if(!file) return;
+
+    // formik state inin manuel olarak set ettik. Seçilen dosyayı image alanına yerleştirdik
+    formik.setFieldValue("image", file);
+
+    // Seçilen görüntüyü ekrana yerleştirdik
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onloadend = () => {
+      setImageSrc(reader.result);
+    }
+
+
+  }
 
   
   return (
@@ -64,7 +114,11 @@ const AdminVehicleNew = () => {
           <Form.Control
             type="file"
             name="image"
+            className="d-none"
+            ref={fileImageRef}
+            onChange={handleImageChange}
           />
+          <img src={imageSrc} className="img-fluid"/>
           {formik.errors.image && (
             <Badge bg="danger" className="image-area-error">
               Please select an image
@@ -72,6 +126,7 @@ const AdminVehicleNew = () => {
           )}
           <Button
             variant={formik.errors.image ? "danger" : "primary"}
+            onClick={handleSelectImage}
           >
             Select Image
           </Button>
